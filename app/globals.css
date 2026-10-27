@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #faf7f2; color: #201b17; font-family: Arial, Helvetica, sans-serif; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: #b58a4b; color: white; }
+.container-shell { width: min(1240px, calc(100% - 48px)); margin-inline: auto; }
+.gold-outline { border: 1px solid #b58a4b; transition: background .2s, color .2s, transform .2s; }
+.gold-outline:hover { background: #b58a4b; color: white; transform: translateY(-1px); }
+.image-zoom img { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.image-zoom:hover img { transform: scale(1.045); }
+.product-image { background: linear-gradient(135deg, #f4ede3, #e8dac7); }
+@media (max-width: 640px) { .container-shell { width: min(100% - 32px, 1240px); } }
