@@ -7,7 +7,7 @@ import { useSite } from "@/components/site-provider";
 const links = [
   { label: "Home", href: "/" },
   { label: "Shop All", href: "/shop" },
-  { label: "Collections", href: "/#collections", dropdown: true },
+  { label: "Collections", href: "/#collections", },
   { label: "Our Story", href: "/#story" },
   { label: "Contact", href: "/#contact" }
 ];
@@ -31,7 +31,6 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-1 sm:gap-3">
           <button aria-label="Search" onClick={() => setSearchOpen(!searchOpen)} className="flex h-10 w-10 items-center justify-center transition hover:text-gold"><Search size={19} strokeWidth={1.5} /></button>
-          <Link href="/shop" aria-label="My account" className="hidden h-10 w-10 items-center justify-center transition hover:text-gold sm:flex"><UserRound size={19} strokeWidth={1.5} /></Link>
           <Link href="/cart" aria-label="Shopping bag" className="relative flex h-10 w-10 items-center justify-center transition hover:text-gold"><ShoppingBag size={20} strokeWidth={1.5} />{cartCount > 0 && <span className="absolute right-0 top-0 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-gold px-1 text-[10px] text-white">{cartCount}</span>}</Link>
         </div>
       </div>
