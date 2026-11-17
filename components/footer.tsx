@@ -19,11 +19,11 @@ const contactDetails = {
   address:
     "Mothorowala Road, Ajabpur Kalan, Near Railway Crossing, Dehradun, Uttarakhand 248121",
 
-  // Search for the showroom directly on Google Maps.
+
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=Mandal+Jewellers+Mothorowala+Road+Ajabpur+Kalan+Dehradun+Uttarakhand+248121",
 
-  // Update these with your actual store timings.
+
   businessHours: "10am to 10pm",
 };
 
@@ -57,10 +57,10 @@ export default function Footer() {
       id="contact"
       className="bg-[#211b16] text-white"
     >
-      {/* Main Footer */}
+     
       <div className="container-shell grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_.8fr_1fr_1.2fr] lg:gap-12 lg:py-16">
 
-        {/* Brand Section */}
+     
         <div>
           <Link
             href="/"
@@ -82,7 +82,7 @@ export default function Footer() {
             Discover timeless elegance with Mandal Jewellers.
           </p>
 
-          {/* Social Media */}
+      
           <div className="mt-6">
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
               Follow Us
@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links */}
+   
         <div>
           <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
             Explore
@@ -126,7 +126,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact Information */}
+      
         <div>
           <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
             Get In Touch
@@ -134,7 +134,7 @@ export default function Footer() {
 
           <div className="space-y-5 text-sm text-white/65">
 
-            {/* Phone */}
+ 
             <a
               href={telephoneLink}
               className="group flex items-start gap-3"
@@ -156,7 +156,7 @@ export default function Footer() {
               </div>
             </a>
 
-            {/* Email */}
+        
             <a
               href={`mailto:${contactDetails.email}`}
               className="group flex items-start gap-3"
@@ -178,7 +178,6 @@ export default function Footer() {
               </div>
             </a>
 
-            {/* Address */}
             <a
               href={contactDetails.mapUrl}
               target="_blank"
@@ -207,7 +206,6 @@ export default function Footer() {
               </div>
             </a>
 
-            {/* Business Hours */}
             <div className="flex items-start gap-3">
               <Clock
                 size={18}
@@ -227,7 +225,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Location / Map */}
+     
         <div>
           <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
             Find Our Store

@@ -1,26 +1,108 @@
+
 "use client";
+
 import { useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { Heart, ShoppingBag, Check } from "lucide-react";
-import type { Product } from "@/data/products";
 import { useSite } from "@/components/site-provider";
 
-export default function ProductCard({ product }: { product: Product }) {
-  const [liked, setLiked] = useState(false);
-  const [added, setAdded] = useState(false);
+type Product = {
+  id: number;
+  name: string;
+  image: string;
+  category?: string;
+  tag?: string;
+};
+
+type ProductCardProps = {
+  product: Product;
+};
+
+export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useSite();
-  const formatPrice = (price: number) => "₹" + price.toLocaleString("en-IN");
+
+  const [isAdded, setIsAdded] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+    });
+
+    setIsAdded(true);
+
+    window.setTimeout(() => {
+      setIsAdded(false);
+    }, 1500);
+  };
+
   return (
     <article className="group min-w-0">
-      <div className="product-image image-zoom relative aspect-[4/5] overflow-hidden">
-        <Link href={`/shop#product-${product.id}`} aria-label={`View ${product.name}`} className="absolute inset-0 z-0"><img src={product.image} alt={product.name} className="h-full w-full object-cover" /></Link>
-        {product.tag && <span className="absolute left-3 top-3 z-10 bg-cream px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[.13em]">{product.tag}</span>}
-        <button onClick={() => setLiked(!liked)} aria-label={liked ? "Remove from wishlist" : "Add to wishlist"} className={`absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-cream/90 transition ${liked ? "text-rose-600" : "text-ink hover:text-gold"}`}><Heart size={16} fill={liked ? "currentColor" : "none"} /></button>
-        <button onClick={() => { addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }); setAdded(true); setTimeout(() => setAdded(false), 1600); }} className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-center gap-2 bg-white/95 py-3 text-[10px] font-semibold uppercase tracking-[.16em] transition hover:bg-ink hover:text-white sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">{added ? <><Check size={15} /> Added to bag</> : <><ShoppingBag size={14} /> Add to bag</>}</button>
+      {/* Product Image */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f2ec]">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+
+        {/* Product Tag */}
+        {product.tag && (
+          <span className="absolute left-3 top-3 bg-[#a58b59] px-3 py-1 text-[9px] font-semibold uppercase tracking-[1.5px] text-white">
+            {product.tag}
+          </span>
+        )}
+
+        {/* Wishlist */}
+        <button
+          type="button"
+          onClick={() => setIsWishlisted((prev) => !prev)}
+          aria-label={
+            isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+          }
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#28251f] transition hover:bg-[#a58b59] hover:text-white"
+        >
+          <Heart
+            size={17}
+            fill={isWishlisted ? "currentColor" : "none"}
+          />
+        </button>
+
+        {/* Add to Cart */}
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          className="absolute bottom-0 left-0 flex w-full translate-y-full items-center justify-center gap-2 bg-[#24211d] py-3 text-[10px] font-semibold uppercase tracking-[1.5px] text-white transition-transform duration-300 group-hover:translate-y-0 max-sm:translate-y-0"
+        >
+          {isAdded ? (
+            <>
+              <Check size={15} />
+              Added to Cart
+            </>
+          ) : (
+            <>
+              <ShoppingBag size={15} />
+              Add to Cart
+            </>
+          )}
+        </button>
       </div>
-      <div className="flex items-start justify-between gap-2 pt-3">
-        <div className="min-w-0"><p className="mb-1 text-[9px] uppercase tracking-[.16em] text-ink/45">{product.category}</p><h3 className="truncate font-serif text-[15px] sm:text-base">{product.name}</h3></div>
-        <div className="shrink-0 text-right"><p className="text-xs font-semibold sm:text-sm">{formatPrice(product.price)}</p>{product.oldPrice && <p className="text-[10px] text-ink/40 line-through">{formatPrice(product.oldPrice)}</p>}</div>
+
+      {/* Product Details */}
+      <div className="px-1 py-4 text-center">
+        {product.category && (
+          <p className="mb-2 text-[9px] font-medium uppercase tracking-[2px] text-[#a58b59]">
+            {product.category}
+          </p>
+        )}
+
+        <h3 className="font-serif text-base text-[#29251f] sm:text-lg">
+          {product.name}
+        </h3>
       </div>
     </article>
   );
